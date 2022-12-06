@@ -100,6 +100,8 @@ public class WebController {
             return null;
 
     }
+    
+    http://localhost:8080/swagger-ui/
 
     /*@RequestMapping(value = "/{nazwa}/{W}/{B}/{T}/{Gramy}", method = GET){
         *//*kod*//*
