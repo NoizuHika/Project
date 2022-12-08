@@ -23,15 +23,14 @@ public class WebController {
     @RequestMapping(value = "/{name}", method = GET)
     public String getEveryProdukt(@PathVariable String name){
 
-            long id = 0;
-            String nameW = null;
-            String nameB = null;
-            String nameT = null;
-            String Gram = null;
-            String nameBat = null;
-            String bat = "batoniki";
-            final String TAG_NAME = "name";
-
+        long id = 0;
+        String nameW = null;
+        String nameB = null;
+        String nameT = null;
+        String Gram = null;
+        String nameBat = null;
+        String bat = "batoniki";
+        final String TAG_NAME = "name";
 
         Root root = new Root();
 
@@ -100,8 +99,39 @@ public class WebController {
             return null;
 
     }
-    
-    http://localhost:8080/swagger-ui/
+
+    /*@RequestMapping(value = "/{letter}", method = GET)
+    public String getProductByLetter(@PathVariable int letter) throws FileNotFoundException {
+
+        BufferedReader reader = new BufferedReader(new FileReader("Produkty.json"));
+        List<Character> chars = null;
+        try {
+
+            chars = new ArrayList<>();
+            while ((letter = reader.read()) != -1) {
+
+                chars.add((char) letter);
+
+            }
+            reader.close();
+
+        } catch (IOException e) {
+            System.out.println("Parsing error " + e.toString());
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Parsing error " + e.toString());
+                }
+            }
+        }
+
+        System.out.println(chars.toString());
+        return null;
+    }*/
+
+}
 
     /*@RequestMapping(value = "/{nazwa}/{W}/{B}/{T}/{Gramy}", method = GET){
         *//*kod*//*
@@ -114,4 +144,3 @@ public class WebController {
         response.setExtra("Some text");
         return response;
     }*/
-}

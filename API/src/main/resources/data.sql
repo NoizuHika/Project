@@ -1,0 +1,2 @@
+INSERT INTO PRODUCT(name,message) values("Mars","W: 70,3g  ,  B: 3,7g  ,  T: 17,0g  ,  Gram : 45g");
+INSERT INTO PRODUCT(name,message) values("Bounty","W: 27,00g  ,  B: 35,00g  ,  T: 16,60g  ,  Gram : 55g");
