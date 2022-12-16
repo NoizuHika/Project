@@ -3,15 +3,12 @@ package com.example.API.controller;
 import com.example.API.models.ALLBatoniki;
 import com.example.API.models.Batoniki;
 import com.example.API.models.Root;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileReader;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 public class WebController {
 
-    @RequestMapping(value = "/{name}", method = GET)
+    /*@RequestMapping(value = "/{name}", method = GET)
     public String getEveryProdukt(@PathVariable String name){
 
         long id = 0;
@@ -98,7 +95,77 @@ public class WebController {
 
             return null;
 
+    }*/
+
+    @RequestMapping(value = "/{name}", method = GET)
+    public String getEveryProdukt(@PathVariable String name) {
+        long id = 0;
+        String nameW = null;
+        String nameB = null;
+        String nameT = null;
+        String Gram = null;
+        String nameBat = null;
+        String bat = "batoniki";
+
+        Root root = new Root();
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Unable to load SQLite JDBC driver");
+            return "Error 404";
+        }
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:mydatabase.db")) {
+            Statement stmt = conn.createStatement();
+
+            if (name.toLowerCase().equals(bat.toLowerCase())) {
+                ResultSet rs = stmt.executeQuery("SELECT name FROM Entity1");
+                List<ALLBatoniki> allBatonikiList = new ArrayList<>();
+                while (rs.next()) {
+                    nameBat = rs.getString("name");
+                    ALLBatoniki allBatoniki = new ALLBatoniki(nameBat);
+                    allBatonikiList.add(allBatoniki);
+                }
+
+                String list = "";
+                for (int i = 0; i < allBatonikiList.size(); i++) {
+                    if (list != "") {
+                        list = list + " , " + allBatonikiList.get(i);
+                    } else {
+                        list = list + allBatonikiList.get(i);
+                    }
+                }
+
+                return list;
+            } else {
+                ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCT WHERE name='" + name + "'");
+
+                while (rs.next()) {
+                    id = rs.getLong("id");
+                    nameW = rs.getString("W");
+                    nameB = rs.getString("B");
+                    nameT = rs.getString("T");
+                    Gram = rs.getString("Gram");
+                }
+
+                if (nameW != null) {
+                    Batoniki batoniki = new Batoniki((int) id, nameW, nameB, nameT, Gram);
+                    List<Batoniki> batonikiList = new ArrayList<>();
+                    batonikiList.add(batoniki);
+                    root.setBatoniki(batonikiList);
+                    return StringUtils.capitalize(name.toLowerCase()) + " " + batoniki;
+                } else {
+                    return "Error 404";
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to connect to the database: " + e.getMessage());
+            return "Error 404";
+        }
     }
+
+
 
     /*@RequestMapping(value = "/{letter}", method = GET)
     public String getProductByLetter(@PathVariable int letter) throws FileNotFoundException {
