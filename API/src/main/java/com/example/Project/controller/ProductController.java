@@ -30,7 +30,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/test")
+    @GetMapping("/odbieranie")
     @ApiOperation(value = "Otrzymanie listy produktów")
     public List<Product> putNewRandomProduct() {
         var p = new Product(null,"mars",0.1,0.1,10.0,10.0);
