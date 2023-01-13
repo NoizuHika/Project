@@ -5,10 +5,9 @@ import com.example.Project.model.Product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -26,31 +25,26 @@ public class ProductController {
         if (filter == null) {
             return productRepository.findAll();
         } else {
-            return productRepository.findByNameContaining(filter).stream().limit(10).collect(Collectors.toList());
+            return productRepository.findByNameContaining(filter).stream().limit(50).collect(Collectors.toList());
         }
     }
 
-    @GetMapping("/test")
-    @ApiOperation(value = "Otrzymanie listy produktów")
-    public List<Product> putNewRandomProduct() {
-        var p = new Product(null,"mars",0.1,0.1,Math.random() * 10.0,10.0);
-        var a = new Product(null,"mleko",0.1,0.1,Math.random() * 10.0,10.0);
-        var b = new Product(null,"makrel",0.1,0.1,Math.random() * 10.0,10.0);
-        var c = new Product(null,"marchew",0.1,0.1,Math.random() * 10.0,10.0);
-        var d = new Product(null,"mors",0.1,0.1,Math.random() * 10.0,10.0);
-        var e = new Product(null,"manna",0.1,0.1,Math.random() * 10.0,10.0);
-        var g = new Product(null,"mod",0.1,0.1,Math.random() * 10.0,10.0);
-        var h = new Product(null,"mor",0.1,0.1,Math.random() * 10.0,10.0);
-
-        productRepository.save(p);
-        productRepository.save(a);
-        productRepository.save(b);
-        productRepository.save(c);
-        productRepository.save(e);
-        productRepository.save(d);
-        productRepository.save(g);
-        productRepository.save(h);
-        return productRepository.findAll();
+    @PostMapping("/test")
+    @ApiOperation(value = "Sprawdzenie czy istnieje dany produkt")
+    public Product checkAndAddProduct(@RequestBody Product product) {
+        Optional<Product> existingProduct = productRepository.findByNameAndBialkaAndTluszczeAndWeglowodaneAndGrams(product.getName(), product.getBialka(), product.getTluszcze(), product.getWeglowodane(), product.getGrams());
+        if (existingProduct.isPresent()) {
+            return existingProduct.get();
+        } else {
+            return productRepository.save(product);
+        }
     }
-
+   // curl -X POST http://localhost:8080/api/data/test -d '{"id":1,"name":"Product 1","bialka":10.0,"tluszcze":30.0,"weglowodane":50.0,"grams":100.0}' -H "Content-Type: application/json"
+   /*     "id" : 1L,
+        "name" : "Product 1",
+        "bialka" : 10.0,
+        "tluszcze" : 30.0,
+        "weglowodane" : 50.0,
+        "grams" : 100.0
+*/
 }

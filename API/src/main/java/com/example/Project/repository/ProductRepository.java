@@ -16,5 +16,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByNameContaining(String name);
 
+    Optional<Product> findByNameAndBialkaAndTluszczeAndWeglowodaneAndGrams(String name, Double bialka, Double tluszcze, Double weglowodane, Double grams);
 
 }
