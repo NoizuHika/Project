@@ -29,7 +29,7 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/test")
+    @PostMapping("/dodanie")
     @ApiOperation(value = "Sprawdzenie czy istnieje dany produkt")
     public Product checkAndAddProduct(@RequestBody Product product) {
         Optional<Product> existingProduct = productRepository.findByNameAndBialkaAndTluszczeAndWeglowodaneAndGrams(product.getName(), product.getBialka(), product.getTluszcze(), product.getWeglowodane(), product.getGrams());
