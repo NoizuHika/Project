@@ -25,7 +25,7 @@ public class ProductController {
         if (filter == null) {
             return productRepository.findAll();
         } else {
-            return productRepository.findByNameContaining(filter).stream().limit(50).collect(Collectors.toList());
+            return productRepository.findByNameContainingIgnoreCase(filter.toLowerCase()).stream().limit(50).collect(Collectors.toList());
         }
     }
 
@@ -40,11 +40,12 @@ public class ProductController {
         }
     }
    // curl -X POST http://localhost:8080/api/data/test -d '{"id":1,"name":"Product 1","bialka":10.0,"tluszcze":30.0,"weglowodane":50.0,"grams":100.0}' -H "Content-Type: application/json"
-   /*     "id" : 1L,
+   /*  {
         "name" : "Product 1",
         "bialka" : 10.0,
         "tluszcze" : 30.0,
         "weglowodane" : 50.0,
         "grams" : 100.0
+        }
 */
 }
