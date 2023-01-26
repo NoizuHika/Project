@@ -1,0 +1,71 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "1",
+        "author": "author",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "product",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "bigint",
+                    "autoIncrement": true
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "bialka",
+                    "type": "double"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "tluszcze",
+                    "type": "double"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "weglowodane",
+                    "type": "double"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "grams",
+                    "type": "double"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "insert": {
+              "tableName": "product",
+              "columns": [
+                "id", "name", "bialka", "tluszcze", "weglowodane", "grams"
+              ],
+              "values": [
+                {
+                  "value": [
+                    1, "Product 1", 10.0, 30.0, 50.0, 100.0
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

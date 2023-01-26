@@ -47,5 +47,13 @@ public class ProductController {
         "weglowodane" : 50.0,
         "grams" : 100.0
         }
+
+
+        mvn spring-boot:run -Dspring-boot.run.arguments=--spring.datasource.backup.operation=backup
+
+        ./mvnw spring-boot:run -Dspring-boot.run.arguments=--spring.datasource.backup.operation=restore
+
+        mvn liquibase:update
+
 */
 }
