@@ -39,7 +39,7 @@ public class ProductController {
             return productRepository.save(product);
         }
     }
-    
+    // http://localhost:8080/h2-console
     
     
 //    @GetMapping("/backup")
