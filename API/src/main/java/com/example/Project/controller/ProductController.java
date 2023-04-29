@@ -42,15 +42,15 @@ public class ProductController {
     
     
     
-    @GetMapping("/backup")
-    @ApiOperation(value = "tworzenie kopii zapasowej")
-    public List<Product> getBackup(@RequestParam(name = "backup", required = false) String backup){
-        if(backup != null){
-            return productRepository.save();
-        }
-    }
+//    @GetMapping("/backup")
+//    @ApiOperation(value = "tworzenie kopii zapasowej")
+//    public List<Product> getBackup(@RequestParam(name = "backup", required = false) String backup){
+//        if(backup != null){
+//            return productRepository.save();
+//        }
+//    }
 
-    @PostMapping("/backup")
+    //@PostMapping("/backup")
 
    // curl -X POST http://localhost:8080/api/data/test -d '{"id":1,"name":"Product 1","bialka":10.0,"tluszcze":30.0,"weglowodane":50.0,"grams":100.0}' -H "Content-Type: application/json"
    /*  {
