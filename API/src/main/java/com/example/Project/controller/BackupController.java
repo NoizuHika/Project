@@ -79,7 +79,6 @@ public class BackupController {
         return ResponseEntity.status(HttpStatus.CREATED).body(code);
     }
 
-    // Метод для проверки кода
     @GetMapping("/checkCode")
     public ResponseEntity<?> checkCode(@RequestParam String code) {
         String json = codes.get(code);
