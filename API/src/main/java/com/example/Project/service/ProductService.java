@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-//для работы с репозиториями, чтобы упростить логику вашего приложения
 @Service
 public class ProductService {
 
